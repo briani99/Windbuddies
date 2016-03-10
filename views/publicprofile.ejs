@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../views/partials/head %>
+    
+    <link  href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/css/bootstrap-datepicker3.min.css" rel="stylesheet">  
+    <link  href="https://s3-eu-west-1.amazonaws.com/kiteloop/public/css/bootstrap-social.css" rel="stylesheet">  
+    
+    <link  href="https://s3-eu-west-1.amazonaws.com/kiteloop/public/css/avatar.css" rel="stylesheet">  
+    <link  href="https://s3-eu-west-1.amazonaws.com/kiteloop/public/css/cropper.css" rel="stylesheet">
+    
+<!--    country dropdown-->
+    <link rel="stylesheet" href="https://s3-eu-west-1.amazonaws.com/kiteloop/public/country-dropdown/css/msdropdown/dd.css" />
+    <link rel="stylesheet" href="https://s3-eu-west-1.amazonaws.com/kiteloop/public/country-dropdown/css/msdropdown/flags.css" />
+
+    </style>
+</head>
+<body>
+    
+    <% include ../views/partials/navbar %>
+    
+    <div class="container">
+      <h1 class="page-header">Public Profile</h1>
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="container" id="crop-avatar">
+                    <!-- Current avatar -->
+                    <div class="avatar-view" title="">
+                      <img src="<%=publicuser.avatar%>" class="avatar img-circle img-thumbnail" id="profileImage" alt="Avatar">
+                    </div>
+              </div>
+            
+            
+            
+        </div>
+          
+
+        <!-- edit form column -->
+        <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
+            
+            <% if (message.length > 0) { %>
+            <div class="alert alert-info alert-dismissable">
+                <a class="panel-close close" data-dismiss="alert">×</a> 
+                <i class="fa fa-check"></i>
+                    The user Profile for <strong><%=publicuser.username%></strong> was updated successfully.
+            </div>
+	       <% } %>
+            
+          <h3>Personal information</h3>
+          <form id="profileEditForm" class="form-horizontal" method="post" action="/user/<%=user._id%>" role="form">
+            <div class="form-group">
+              <label class="col-xs-4 control-label">Username:</label>
+              <div class="col-xs-8">
+                <input class="form-control" name="username" value="<%=publicuser.username%>" type="text" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-4 control-label">First name:</label>
+              <div class="col-xs-8">
+                <input class="form-control" name="firstname" value="<%=publicuser.firstname%>" type="text" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-4 control-label">Last name:</label>
+              <div class="col-xs-8">
+                <input class="form-control" name="lastname" value="<%=publicuser.lastname%>" type="text" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-4 control-label">Date of Birth:</label>
+              <div class="col-xs-8">
+                    <div class="input-group date" id="DOBpickerArea">
+                        <input type="text" id="DOBpicker" name="dob" class="form-control" name="dob" value="" readonly><span id="addonDate" class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                    </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-4 control-label">Sex:</label>
+              <div class="col-xs-8">
+                    <label class="radio-inline"><input type="radio" id="sexMale" name="sex" value="M" readonly>Male</label>
+                    <label class="radio-inline"><input type="radio" id="sexFemale" name="sex" value="F" readonly>Female</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-4 control-label">Country:</label>
+                
+                <div id="changeCountry" class="col-xs-8">
+                        <% include ../views/partials/countryDD %>
+                </div>
+            </div>
+            
+              
+            <h3>Beaches</h3> 
+              
+            <div class="form-group readonly">
+              <label class="col-xs-4 control-label">Home Spot:</label>
+                <div class="col-xs-8">
+                    <% if (publicuser.favbeach) { %>
+                        <input id="alwaysRO" class="form-control" value="<%=publicuser.favbeach.name%>" type="text" readonly>
+                    <% } %>
+                </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+    
+    <!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/js/bootstrap-datepicker.min.js"></script>
+
+
+<script src="https://s3-eu-west-1.amazonaws.com/kiteloop/public/country-dropdown/js/msdropdown/jquery.dd.js"></script>
+
+    
+<script>
+    $(document).ready(function() {
+      
+        var user = <%- JSON.stringify(publicuser) %>;
+        
+        $("#addonDate").hide();
+        
+        $("#country").msDropdown();
+        
+        var oDropdown = $("#country").msDropdown().data("dd"); 
+        oDropdown.set("value", [user.country]);
+
+        if (user.sex === "M"){
+            $("#sexMale").prop( "checked", true );
+        }else{
+            $("#sexFemale").prop( "checked", true );
+        }
+        $('#DOBpicker').datepicker({    
+                                    format: 'dd MM yyyy',
+                                    autoclose: true,
+                                    toggleActive: true,
+                                    defaultViewDate: { year: 1980, month: 06, day: 15 }});
+        $('#DOBpicker').datepicker('update', new Date(user.dob));
+        
+        $("#country").prop("readonly", true);
+        $("#country").prop("readonly", true);
+    });
+</script>
+
+    
+</body>
+</html>
+</html>

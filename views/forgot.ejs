@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+    <% include ../views/partials/head %> 
+</head>
+<body>
+<div class="container logonbox">
+<div class="col-sm-4 col-sm-offset-4 login">
+	<h1></h1>
+    <h2><span class="fa fa-sign-in"></span>Reset Password</h2>
+    
+	<!-- LOGIN FORM -->
+	<form action="/forgot" method="post">
+			<input type="text" class="form-control" name="email" placeholder="Email">
+            <button type="submit" class="btn btn-warning btn-login">Reset Password</button>
+	</form>
+
+	<hr>
+    <div class="forgot login-footer">
+            <span>Looking to 
+                <a href="/signup">create an account?</a>
+            </span>
+            </br>
+            <span>
+                <a href="/login">back to login screen</a>
+            </span>
+            </br>
+    </div>
+
+    </div>
+</div>
+</body>
+</html>

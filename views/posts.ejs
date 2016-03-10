@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../views/partials/head %> 
+</head>
+
+<body>
+      <!-- Static navbar -->
+        <% include ../views/partials/navbar %> 
+
+    <div class="container">
+        <h2 class="page-header"><%= beach.name %></h2>
+        <div class="row">
+            <!-- left column -->
+            <div class="col-xs-12 col-sm-4 col-md-3">
+                
+               <div id="selectBeachPost" class="dropdown col-xs-12"></div>
+                
+                <div id="panelLayoutLinks"  class="panelLayout hidden-xs">
+                    <h3 id="linksHeader">Navigate</h3>
+                    <a href="/beach/<%=beach._id %>" id="linkBtnInfo" class="btn btn-info linkBtn linkBtnInfo" role="button">
+                        Beach Information<i class="fa fa-fw fa-info-circle fa-lg"></i></a>
+                    <a href="/post/byBeach/<%=beach._id %>" id="linkBtnPosts" class="btn btn-primary linkBtn linkBtnPosts" role="button">
+                        Live Wind Updates<i class="fa fa-fw fa-comments fa-lg"></i></a>
+                    <a href="#" class="btn btn-success linkBtn linkBtnHome" id="linkBtnHome" role="button">
+                        Set as home Beach<i class="fa fa-fw fa-home fa-lg"></i></a>
+                    <a href="#" class="btn btn-warning linkBtn linkBtnFav" id="linkBtnFav" role="button">
+                        Add to My Favorites<i class="fa fa-fw fa-star fa-lg"></i></a>
+                    <a href="/beach/map/<%=beach._id %>" class="btn btn-danger linkBtn linkBtnMap" id="linkBtnMap" role="button">
+                        Goto Map Position<i class="fa fa-fw fa-map-marker fa-lg"></i></a>   
+                </div>
+            </div>
+<!--
+--------------------------------------------------------------------- 
+--------------Create Post Area   ------------------------------------ 
+--------------------------------------------------------------------- 
+-->
+ 
+            <div class="col-xs-12 col-sm-8 col-md-9">
+                <div id="createPostArea" class="panel-shadow">
+                    <h3>Create Post</h3>
+                    <ul class="nav nav-tabs">
+                            <li class='active'><a data-toggle="tab" href="#windTab"><i class="fa fa-flag"></i> Wind</a></li>        
+                            <li><a data-toggle="tab" href="#textTab"><i class="fa fa-pencil"></i> Info</a></li>
+                    </ul>
+                    <div class="tab-content">
+                      <div id="windTab" class="tab-pane fade in active">
+                           <form id="createwindPostform" method="post" action="/post">
+                            <input name="user" type="hidden" value= <%= user._id %> >
+                            <input name="username" type="hidden" value= <%= user.username %> >
+                            <input name="beach" type="hidden" value= <%= beach._id %> >
+                            <input name="type" type="hidden" value= "Wind">
+
+                            <div class="row windPost">
+                                    <div id="directionDial" class="dial text-center col-xs-6">
+                                        <h3 id="directiontitle" class="postHeader">Direction</h3>
+                                        <i class="fa fa-location-arrow fa-3x insideIcon insideIconChange" style="color:lightgrey"></i>
+                                        <input class="directionKnob" id="dKnobChange" name="direction" data-min="0" data-skin="tron"
+                                               data-max="360" data-width="100%" data-linecap=round 
+                                               data-cursor=true data-bgColor="grey" data-fgColor="#337ab7" 
+                                               data-thickness=.2 value="50">
+                                        <h3 id="directionDescChange" class="postHeader">N</h3>
+                                    </div>
+                                   <div id="speedDial" class="dial text-center col-xs-6">
+                                        <h3 id="speedtitle" class="postHeader">Speed</h3>
+                                        <input class="speedKnob" id="sKnobChange" name="knots" data-min="0" data-max="50" data-skin="tron"
+                                               data-width="100%" data-fgColor="lightgrey" data-bgColor="grey" data-linecap=round 
+                                               data-angleOffset=-125 data-angleArc=250 data-rotation="clockwise"
+                                               data-thickness=.2  value="15">
+                                        <h3 id="speedDescChange" class="postHeader">Knots</h3>
+                                    </div>
+                            </div>
+                            <div class="row infoPost">
+                                <p id="windSubjectEmoj" contentEditable=true  data-text="Share the wind.." class="form-control postEmoji"></p>
+                                <input id="windSubjectText" hidden=true name="subject" value=""></input>
+                            </div>
+                            <ul class='row list-inline'>
+                                <li class='pull-right'><input type="submit" class='btn btn-primary btn-s' value="Create Post"></li>
+                            </ul>
+                        </form>
+                      </div>
+                      <div id="textTab" class="tab-pane fade">
+                        <form id="createtextPostform" method="post" action="/post">
+                            <input name="user" type="hidden" value= <%= user._id %> >
+                            <input name="beach" type="hidden" value= <%= beach._id %> >
+                            <input name="type" type="hidden" value= "Text">
+
+                            <div id="row infoPost">
+                                <p id="textSubjectEmoj" contentEditable=true data-text="Share the wind.." class="form-control postEmoji"></p>
+                                <input id="textSubjectText" hidden=true name="subject" value=""></input>
+                            </div>
+                            <ul class='row list-inline'>
+                                <li class='pull-right'><input type="submit" id="btnPost" class='btn btn-primary btn-s' value="Create Post"></li>
+                            </ul>
+                        </form>
+                      </div>
+                    </div>
+                </div>
+<!--
+--------------------------------------------------------------------- 
+--------------Activity Area Timeline  ------------------------------- 
+--------------------------------------------------------------------- 
+-->
+                <hr>
+                <h3 class="page-header">Activity</h3>
+                <!-- select the beach and show timeline -->
+                <div id="timeline"></div>
+
+            </div>
+        </div>              
+    </div>
+    
+<div class="container-fullwidth">
+      <!-- Static footer -->
+<!--        < include ../views/partials/footer %>-->
+</div>
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<script src="https://s3-eu-west-1.amazonaws.com/kiteloop/public/lib/jquery.knob.min.js"></script>
+<script src="https://s3-eu-west-1.amazonaws.com/kiteloop/public/lib/ejs.min.js"></script>
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/0.9.5/emojify.min.js"></script>
+
+<script>
+    var activeBeachID = <%- JSON.stringify(beach._id) %>;
+    var lon = <%- JSON.stringify(beach.longitude) %>;
+    var lat = <%- JSON.stringify(beach.latitude) %>;
+    var beaches = <%- JSON.stringify(user.beaches) %>;
+    var logonuserid = <%- JSON.stringify(user._id) %>;
+    var p = <%- JSON.stringify(posts) %>;
+</script>
+<script src="https://s3-eu-west-1.amazonaws.com/kiteloop/public/js/posts.js"></script>                     
+
+</body>
+</html>

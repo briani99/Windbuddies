@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+    <% include ../views/partials/head %> 
+    <link href="https://s3-eu-west-1.amazonaws.com/kiteloop/public/css/bootstrap-social.css" rel="stylesheet">
+</head>
+<body class="loginpage">
+<div class="logonbox">
+    <div class="login">
+        
+        <a href="/"><img alt="Kiteloop" src="https://s3-eu-west-1.amazonaws.com/kiteloop/public/img/kiteloop.png" height="40"></img></a>
+<!--
+        <div class="social">
+            <a href="/connect/facebook" class="btn btn-block btn-social btn-facebook">
+                <span class="fa fa-facebook"></span> Connect with Facebook
+            </a>
+        </div>
+-->
+
+        <% if (message.length > 0) { %>
+            <div class="alert alert-danger"><%= message %></div>
+        <% } %>
+
+        <!-- LOGIN FORM -->
+        <form action="/login" method="post">
+                <div class="input-group margin-sm">
+                      <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+                      <input type="text" class="form-control" name="email" placeholder="Email" value="briani9973@gmail.com">
+                </div>
+                <div class="input-group margin-sm">
+                      <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
+                      <input type="password" class="form-control" name="password" placeholder="Password" value="123">
+                </div>
+                <label class="rememberme">
+                    <input type="checkbox" id="rememberme" name="rememberme"> Remember me
+                </label>
+
+                <button type="submit" class="btn btn-warning btn-login">Login</button>
+        </form>
+
+        <hr>
+        <div class="forgot login-footer">
+                <span>Looking to 
+                    <a href="/signup">create an account?</a>
+                </span>
+                </br>
+                <span>
+                    <a href="/forgot">Forgot your Password?</a>
+                </span>
+                </br>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../views/partials/head %>
+    
+    <link href="https://s3-eu-west-1.amazonaws.com/kiteloop/public/css/leaflet7-7.css" rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.css" rel="stylesheet">
+    <link href="//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css" rel="stylesheet" />
+    
+    <link href="https://s3-eu-west-1.amazonaws.com/kiteloop/public/css/leaflet-sidebar.min.css" rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css" rel="stylesheet"/>
+    <link href="https://s3-eu-west-1.amazonaws.com/kiteloop/public/css/kiteloop.css" rel="stylesheet">
+</head>
+
+<body class="mapbody">
+    <% include ../views/partials/navbar %>
+    
+    <div id="sidebar" class="sidebar collapsed">
+        <!-- Nav tabs -->
+
+        <div class="sidebar-tabs">
+            <ul role="tablist">
+                <li id="iconLinks" class="disabled"><a href="#sidepanelLinks" role="tab"><i class="fa fa-link"></i></a></li>
+                <li id="iconWeather"  class="disabled"><a href="#sidepanelWeather" role="tab"><i class="fa fa-cloud"></i></a></li>
+<!--                <li id="iconBeach"  class="disabled"><a href="#sidepanelBeach" role="tab"><i class="fa fa-info-circle"></i></a></li>-->
+                <li id="iconInstagram"  class="disabled"><a href="#sidepanelInstagram" role="tab"><i class="fa fa-camera"></i></a></li>
+                
+<!--                <li id="iconSchools" class="disabled"><a href="#sidepanelSchools" role="tab"><i class="fa fa-graduation-cap"></i></a></li>-->
+            </ul>
+
+            <ul role="tablist">
+                <li id="iconSearch"><a href="#sidepanelSearch" role="tab"><i class="fa fa-search"></i></a></li>
+                <li id="iconCreate"><a href="#sidepanelCreate" role="tab"><i class="fa fa-map-marker"></i></a></li>
+                <li id="iconFavs"><a href="#sidepanelFavs" role="tab"><i class="fa fa-star"></i></a></li>
+                
+            </ul>
+        </div>
+
+
+        <!-- Tab panes -->
+        <div class="sidebar-content">
+            
+            <div class="sidebar-pane" id="sidepanelSearch">
+                <h1 class="sidebar-header">Search beach<div class="sidebar-close"><i class="fa fa-caret-left"></i></div></h1>
+                <div id="sidepanelSearch-content">
+                    <div  id="panelLayoutSearch" class="panelLayout">
+                        <div class="form-group has-feedback">
+                            <input type="text" id="searchBeach" class="form-control" placeholder="Search" />
+                            <i class="glyphicon glyphicon-search form-control-feedback"></i>
+                        </div>
+                        <div id="searchResults"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar-pane" id="sidepanelWeather">
+                <h1 class="sidebar-header">Live Weather<div class="sidebar-close"><i class="fa fa-caret-left"></i></div></h1>
+                <div id="sidepanelWeather-content">
+                    <div id="panelLayoutWeather" class="panelLayout">
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-pane" id="sidepanelLinks">
+                <h1 class="sidebar-header">Beach Links<div class="sidebar-close"><i class="fa fa-caret-left"></i></div></h1>
+                <div id="sidepanelLinks-content">
+                    <div id="panelLayoutLinks"  class="panelLayout">
+                        
+                        <h3 id="linksHeader"></h3>
+                            
+                            <a href="#" id="linkBtnInfo" class="btn btn-info linkBtn linkBtnInfo" role="button">
+                                Beach Information<i class="fa fa-fw fa-info-circle fa-lg"></i></a>
+
+                            <a href="#" id="linkBtnPosts" class="btn btn-primary linkBtn linkBtnPosts" role="button">
+                                Live Wind Updates<i class="fa fa-fw fa-comments fa-lg"></i></a>
+
+                            <!--<a href="/user/setHomeBeach/%=beach._id %>" class="btn btn-success linkBtn" role="button">-->
+                            <a href="#" class="btn btn-success linkBtn linkBtnHome" id="linkBtnHome" role="button">
+                                Set as home Beach<i class="fa fa-fw fa-home fa-lg"></i></a>
+
+                            <!--<a href="/user/toggleFavBeaches/%=beach._id %>" class="btn btn-warning linkBtn" role="button">-->
+                            <a href="#" class="btn btn-warning linkBtn linkBtnFav" id="linkBtnFav" role="button">
+                                Add to My Favorites<i class="fa fa-fw fa-star fa-lg"></i></a>
+
+                            <!--<a href="/beach/%=beach._id %>" class="btn btn-danger linkBtn" role="button">-->
+                            <a href="#" class="btn btn-danger linkBtn linkBtnMap" id="linkBtnMap" role="button">
+                                Goto Map Position<i class="fa fa-fw fa-map-marker fa-lg"></i></a>
+
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-pane" id="sidepanelCreate">
+                <h1 class="sidebar-header">Create Beach<div class="sidebar-close"><i class="fa fa-caret-left"></i></div></h1>
+                <div id="sidepanelCreate-content">
+                    <div id="panelLayoutCreate" class="panelLayout">
+                            
+                    </div>
+                </div>
+            </div>
+                
+            <div class="sidebar-pane" id="sidepanelInstagram">
+                <h1 class="sidebar-header">Instagram Photos<div class="sidebar-close"><i class="fa fa-caret-left"></i></div></h1>
+                <div id="sidepanelInstagram-content">
+                    <div id="panelLayoutInstagram" class="panelLayout">
+                        <div id="panelInstagramText"></div>
+                        <div id="panelInstagramImages"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar-pane" id="sidepanelFavs">
+                <h1 class="sidebar-header">Favorite Beaches<div class="sidebar-close"><i class="fa fa-caret-left"></i></div></h1>
+                <div id="sidepanelFavs-content">
+                    <div id="panelLayoutFav" class="panelLayout">
+                        <div id="favResults"></div>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="sidebar-pane" id="sidepanelSchools">
+                <h1 class="sidebar-header">Schools, Shops<div class="sidebar-close"><i class="fa fa-caret-left"></i></div></h1>
+                <div id="sidepanelSchools-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="map" class="sidebar-map"></div>
+    
+    
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        
+<script src="https://s3-eu-west-1.amazonaws.com/kiteloop/public/lib/leaflet7-7.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/leaflet.markercluster.js"></script>
+<script src="https://s3-eu-west-1.amazonaws.com/kiteloop/public/lib/leaflet-sidebar.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+
+<script src="https://s3-eu-west-1.amazonaws.com/kiteloop/public/lib/ejs.min.js"></script>
+        
+<script src="//code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
+<script>
+        var userbeaches = <%- JSON.stringify(user.beaches) %>;
+        var bs = <%- JSON.stringify(beaches) %>;
+        var schools = <%- JSON.stringify(schools) %>;
+        var gob = <%- JSON.stringify(gotoBeach) %>;
+</script>
+<script src="https://s3-eu-west-1.amazonaws.com/kiteloop/public/js/map.js" ></script>
+
+</body>
+</html>

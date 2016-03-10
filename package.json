@@ -1,0 +1,44 @@
+{
+  "name": "windbuddies",
+  "main": "launch.js",
+  "dependencies": {
+    "bcrypt-nodejs": "latest",
+    "body-parser": "~1.0.0",
+    "connect-flash": "~0.1.1",
+    "cookie-parser": "~1.0.0",
+    "ejs": "~0.8.5",
+    "ejs-mate": "^2.3.0",
+    "express": "~4.0.0",
+    "express-session": "~1.0.0",
+    "mongoose": "~3.8.1",
+    "morgan": "~1.0.0",
+    "passport": "~0.1.17",
+    "passport-facebook": "~1.0.2",
+    "passport-google-oauth": "~0.1.5",
+    "passport-local": "~0.1.6",
+    "passport-twitter": "~1.0.2",
+    "passport-instagram": "~1.0.0",
+    "nodemailer": "~0.7.0",
+    "async": "~1.5.0",
+    "crypto": "0.0.3",
+    "multer": "~0.1.8",
+    "easyimage": "~2.1.0",
+    "passport-remember-me": "0.0.1",
+    "aws-sdk": "~2.2.38",
+    "express-validator": "~2.19.1",
+    "method-override": "~2.3.5"
+  },
+  "scripts": {
+    "start": "node launch.js"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-jshint": "~1.0.0",
+    "grunt-contrib-nodeunit": "~1.0.0",
+    "grunt-contrib-uglify": "~1.0.0",
+    "grunt-contrib-concat": "~1.0.0",
+    "grunt-contrib-imagemin": "~1.0.0",
+    "grunt-contrib-copy": "~1.0.0",
+    "grunt-contrib-cssmin": "~1.0.0"
+  }
+}

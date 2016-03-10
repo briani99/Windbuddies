@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../views/partials/head %>
+    
+    <link  href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/css/bootstrap-datepicker3.min.css" rel="stylesheet">  
+    <link  href="https://s3-eu-west-1.amazonaws.com/kiteloop/public/css/bootstrap-social.css" rel="stylesheet">  
+    
+    <link  href="https://s3-eu-west-1.amazonaws.com/kiteloop/public/css/avatar.css" rel="stylesheet">  
+    <link  href="https://s3-eu-west-1.amazonaws.com/kiteloop/public/css/cropper.min.css" rel="stylesheet">
+    
+<!--    country dropdown-->
+    <link rel="stylesheet" href="https://s3-eu-west-1.amazonaws.com/kiteloop/public/country-dropdown/css/msdropdown/dd.css" />
+    <link rel="stylesheet" href="https://s3-eu-west-1.amazonaws.com/kiteloop/public/country-dropdown/css/msdropdown/flags.css" />
+    
+    <style>
+    
+
+    </style>
+</head>
+<body>
+    
+    <% include ../views/partials/navbar %>
+    
+    <div class="container">
+      <h1 class="page-header">Edit Profile</h1>
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="container" id="crop-avatar">
+                    <!-- Current avatar -->
+                    <div class="avatar-view" title="">
+                      <img src="<%=user.avatar%>" class="avatar img-circle img-thumbnail" id="profileImage" alt="Avatar">
+                    </div>
+
+                <!-- Cropping modal -->
+                <div class="modal fade" id="avatar-modal" aria-hidden="true" 
+                     aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
+                  <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                      <form class="avatar-form" action="/user/avatar" enctype="multipart/form-data" method="post">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title" id="avatar-modal-label">Change Avatar</h4>
+                        </div>
+                        <div class="modal-body">
+                          <div class="avatar-body">
+
+                            <!-- Upload image and data -->
+                            <div class="avatar-upload">
+                              <input type="hidden" class="avatar-src" name="avatar_src">
+                              <input type="hidden" class="avatar-data" name="avatar_data">
+                              <label for="avatarInput">Local upload</label>
+                              <input type="file" class="avatar-input" id="avatarInput" name="avatar_file">
+                            </div>
+
+                            <!-- Crop and preview -->
+                            <div class="row">
+                              <div class="col-md-9 col-sm-12">
+                                <div class="avatar-wrapper"></div>
+                              </div>
+                              <div class="col-md-3 hidden-sm hidden-xs">
+                                <div class="avatar-preview preview-lg"></div>
+                                <div class="avatar-preview preview-md"></div>
+                                <div class="avatar-preview preview-sm"></div>
+                              </div>
+                            </div>
+
+                            <div class="row avatar-btns">
+            
+                              <div class="col-md-9"></div>
+                              <div class="col-md-3">
+                                <button type="submit" class="btn btn-primary btn-block avatar-save">Done</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div><!-- /.modal -->
+                <!-- Loading state -->
+                <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
+              </div>
+            
+            <div id="socialNeworkBtns"></div>
+            
+            <% if (user.facebook.token) { %>
+                <a href="/unlink/facebook" class="btn btn-block btn-social btn-facebook">
+                    <span class="fa fa-facebook"></span> Disconnect Facebook
+                </a>
+                <p class="lorem">
+                    Account is connected to Facebook id <strong><%= user.facebook.id %></strong>
+                </p>
+                
+            <% } else { %>
+                <a href="/connect/facebook" class="btn btn-block btn-social btn-facebook">
+                    <span class="fa fa-facebook"></span> Connect Facebook
+                </a>
+                <p class="lorem">
+                    Account is not connected to Facebook
+                </p>
+            <% } %>
+            
+            
+            <% if (user.twitter.token) { %>
+                <a href="/unlink/twitter" class="btn btn-block btn-social btn-twitter">
+                    <span class="fa fa-twitter"></span> Disconnect Twitter
+                </a>
+                <p class="lorem">
+                    Account is connected to Twitter id <strong><%= user.twitter.id %></strong>
+                </p>
+            <% } else { %>
+                <a href="/connect/twitter" class="btn btn-block btn-social btn-twitter">
+                    <span class="fa fa-twitter"></span> Connect Twitter
+                </a>
+                <p class="lorem">
+                    Account is not connected to Twitter
+                </p>
+            <% } %>
+            
+            <% if (user.instagram.token) { %>
+                <a href="/unlink/instagram" class="btn btn-block btn-social btn-instagram">
+                    <span class="fa fa-instagram"></span> Disconnect Instagram
+                </a>
+                <p class="lorem">
+                    Account is connected to Instagram id <strong><%= user.instagram.id %></strong>
+                </p>
+            <% } else { %>
+                <a href="/connect/instagram" class="btn btn-block btn-social btn-instagram">
+                    <span class="fa fa-instagram"></span> Connect Instagram
+                </a>
+                <p class="lorem">
+                    Account is not connected to Instagram
+                </p>
+            <% } %>
+            
+            <% if (user.google.token) { %>
+                <a href="/unlink/google" class="btn btn-block btn-social btn-google">
+                    <span class="fa fa-google-plus"></span> Disconnect Google
+                </a>
+                <p class="lorem">
+                    Account is connected to Google id <strong><%= user.google.id %></strong>
+                </p>
+            <% } else { %>
+                <a href="/connect/google" class="btn btn-block btn-social btn-google">
+                    <span class="fa fa-google"></span> Connect Google
+                </a>
+                <p class="lorem">
+                    Account is not connected to Google
+                </p>
+            <% } %>
+            
+        </div>
+          
+
+        <!-- edit form column -->
+        <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
+            
+            <% if (message.length > 0) { %>
+            <div class="alert alert-info alert-dismissable">
+                <a class="panel-close close" data-dismiss="alert">×</a> 
+                <i class="fa fa-check"></i>
+                    The user Profile for <strong><%=user.username%></strong> was updated successfully.
+            </div>
+	       <% } %>
+            
+          <h3>Personal information</h3>
+          <form id="profileEditForm" class="form-horizontal" method="post" action="/user/<%=user._id%>" role="form">
+            <div class="form-group">
+              <label class="col-xs-4 control-label">Username:</label>
+              <div class="col-xs-8">
+                <input class="form-control" name="username" value="<%=user.username%>" type="text">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-4 control-label">First name:</label>
+              <div class="col-xs-8">
+                <input class="form-control" name="firstname" value="<%=user.firstname%>" type="text">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-4 control-label">Last name:</label>
+              <div class="col-xs-8">
+                <input class="form-control" name="lastname" value="<%=user.lastname%>" type="text">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-4 control-label">Date of Birth:</label>
+              <div class="col-xs-8">
+                    <div class="input-group date" id="DOBpickerArea">
+                        <input type="text" id="DOBpicker" name="dob" class="form-control" name="dob" value=""><span id="addonDate" class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                    </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-4 control-label">Sex:</label>
+              <div class="col-xs-8">
+                    <label class="radio-inline"><input type="radio" id="sexMale" name="sex" value="M">Male</label>
+                    <label class="radio-inline"><input type="radio" id="sexFemale" name="sex" value="F">Female</label>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-xs-4 control-label">location:</label>
+                
+                <div id="changeCountry" class="col-xs-8">
+                        <% include ../views/partials/countryDD %>
+                </div>
+            </div>
+            
+              
+            <h3>Beaches</h3> 
+              
+            <div class="form-group readonly">
+              <label class="col-xs-4 control-label">Home Spot:</label>
+                <div class="col-xs-8">
+                    <% if (user.favbeach) { %>
+                    <input id="alwaysRO" class="form-control" value="<%=user.favbeach.name%>" type="text" readonly>
+                    <% } %>
+                </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label"></label>
+              <div class="col-md-8">
+                 
+                <div id="btnEdit" class="btn btn-success col-xs-12 col-md-12"><i class="fa fa-pencil"></i> Edit</div>
+                <button id="btnSave" type="submit" class="btn btn-primary col-xs-6 col-md-6"><i class="fa fa-check"></i> Save</button>
+                <div id="btnCancel" type="reset" class="btn btn-danger col-xs-6 col-md-6"><i class="fa fa-times"></i> Cancel</div>
+                  
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+    
+    <!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="//cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/js/bootstrap-datepicker.min.js"></script>
+
+<script src="https://s3-eu-west-1.amazonaws.com/kiteloop/public/lib/cropper.min.js"></script>
+<script src="https://s3-eu-west-1.amazonaws.com/kiteloop/public/avatar.js"></script>
+
+<script src="https://s3-eu-west-1.amazonaws.com/kiteloop/public/country-dropdown/js/msdropdown/jquery.dd.min.js"></script>
+
+<script>
+    var user = <%- JSON.stringify(user) %>;
+</script>
+<script src="https://s3-eu-west-1.amazonaws.com/kiteloop/public/js/profile.js"></script>
+</body>
+</html>

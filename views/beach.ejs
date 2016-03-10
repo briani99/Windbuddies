@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../views/partials/head %>
+    
+<!--    country dropdown-->
+    <link rel="stylesheet" href="https://s3-eu-west-1.amazonaws.com/kiteloop/public/country-dropdown/css/msdropdown/dd.css" />
+    <link rel="stylesheet" href="https://s3-eu-west-1.amazonaws.com/kiteloop/public/country-dropdown/css/msdropdown/flags.css" />
+</head>
+<body>
+    
+    <% include ../views/partials/navbar %>
+    
+    <div class="container">
+      <h1 class="page-header"><%=beach.name%> Profile</h1>
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-4 col-sm-6 col-xs-12">
+                
+                <div id="panelLayoutLinks"  class="panelLayout hidden-xs">
+                    <h3 id="linksHeader">Navigate</h3>
+                    <a href="/beach/<%=beach._id %>" id="linkBtnInfo" class="btn btn-info linkBtn linkBtnInfo" role="button">
+                        Beach Information<i class="fa fa-fw fa-info-circle fa-lg"></i></a>
+                    <a href="/post/byBeach/<%=beach._id %>" id="linkBtnPosts" class="btn btn-primary linkBtn linkBtnPosts" role="button">
+                        Live Wind Updates<i class="fa fa-fw fa-comments fa-lg"></i></a>
+                    <a href="#" class="btn btn-success linkBtn linkBtnHome" id="linkBtnHome" role="button">
+                        Set as home Beach<i class="fa fa-fw fa-home fa-lg"></i></a>
+                    <a href="#" class="btn btn-warning linkBtn linkBtnFav" id="linkBtnFav" role="button">
+                        Add to Favorites<i class="fa fa-fw fa-star fa-lg"></i></a>
+                    <a href="/beach/map/<%=beach._id %>" class="btn btn-danger linkBtn linkBtnMap" id="linkBtnMap" role="button">
+                        Goto Map Position<i class="fa fa-fw fa-map-marker fa-lg"></i></a>   
+                </div>
+                <h3 id="linksHeader">Weather</h3>
+                <iframe src="https://embed.windyty.com/?<%=beach.latitude%>,<%=beach.longitude%>,6,message,marker" width="300" height="500" frameborder="0"></iframe>
+            
+        </div>
+          
+
+        <!-- edit form column -->
+        <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
+            
+            <% if (message.length > 0) { %>
+            <div class="alert alert-info alert-dismissable">
+                <a class="panel-close close" data-dismiss="alert">×</a> 
+                <i class="fa fa-check"></i>
+                    The beach <strong><%=beach.name%></strong> <%=message%> 
+            </div>
+	       <% } %>
+            
+          <h3>Beach information</h3>
+          <form id="beachEditForm" class="form-horizontal" method="post" action="/beach/<%=beach._id%>" role="form">
+            <div class="form-group">
+              <label class="col-xs-4 control-label">Name:</label>
+              <div class="col-xs-8">
+                <input class="form-control" name="name" value="<%=beach.name%>" type="text">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-4 control-label">Town/City:</label>
+              <div class="col-xs-8">
+                <input class="form-control" name="city" value="<%=beach.city%>" type="text">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-4 control-label">Country:</label>
+              <div class="col-xs-8">
+                    <% include ../views/partials/countryDD %>
+              </div>
+            </div>
+            
+            <h3>Water</h3> 
+              
+            <div class="form-group">
+              <label class="col-xs-4 control-label">Type:</label>
+              <div class="col-xs-8">
+                <input class="form-control" name="waterType" value="<%=beach.waterType%>" type="text">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-4 control-label">Hazards:</label>
+              <div class="col-xs-8">
+                <input class="form-control" name="waterHazards" value="<%=beach.waterHazards%>" type="text">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-4 control-label">Quality:</label>
+              <div class="col-xs-8">
+                <input class="form-control" name="waterQuality" value="<%=beach.waterQuality%>" type="text">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-4 control-label">Tides:</label>
+              <div class="col-xs-8">
+                <input class="form-control" name="waterTides" value="<%=beach.waterTides%>" type="text">
+              </div>
+            </div>
+              
+            <h3>Beaches</h3> 
+              
+            <div class="form-group">
+              <label class="col-xs-4 control-label">Type:</label>
+              <div class="col-xs-8">
+                <input class="form-control" name="beachType" value="<%=beach.beachType%>" type="text">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-4 control-label">Hazards:</label>
+              <div class="col-xs-8">
+                <input class="form-control" name="beachHazards" value="<%=beach.beachHazards%>" type="text">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-4 control-label">Size:</label>
+              <div class="col-xs-8">
+                <input class="form-control" name="beachSize" value="<%=beach.beachSize%>" type="text">
+              </div>
+            </div>
+              
+            <h3>Wind</h3> 
+              
+            <div class="form-group">
+              <label class="col-xs-4 control-label">Windguru Link</label>
+              <div class="col-xs-8">
+                <input class="form-control" name="windguru" value="<%=beach.windguru%>" type="text">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-4 control-label">Best Direction</label>
+              <div class="col-xs-8">
+                <input class="form-control" name="" value="" type="text">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-4 control-label">Best Months</label>
+              <div class="col-xs-8">
+                <input class="form-control" name="" value="" type="text">
+              </div>
+            </div>
+            
+            <h3>Description</h3> 
+              
+            <div class="form-group">
+              <label class="col-xs-4 control-label"></label>
+              <div class="col-xs-8">
+                <textarea id="descArea" class="form-control vresize" name="desc"><%=beach.desc%></textarea>
+              </div>
+            </div>
+              
+            <div class="form-group">
+              <label class="col-xs-4 control-label"></label>
+              <div class="col-xs-8">
+                
+                <div id="btnEdit" class="btn btn-success col-xs-12 col-md-12"><i class="fa fa-pencil"></i> Edit</div>
+                <button id="btnSave" type="submit" class="btn btn-primary col-xs-6 col-md-6"><i class="fa fa-check"></i> Save</button>
+                <button id="btnCancel" type="reset" class="btn btn-danger col-xs-6 col-md-6"><i class="fa fa-times"></i> Cancel</button>
+                  
+              </div>
+            </div>
+          </form>
+        </div>
+        </div>
+        
+        <div class="row">
+            <h3>Beach Images</h3>
+            <div id="beachImages"></div>
+        </row>
+    </div>
+    
+    
+    
+    
+    
+    <!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://s3-eu-west-1.amazonaws.com/kiteloop/public/country-dropdown/js/msdropdown/jquery.dd.min.js"></script>
+<script>
+        var b = <%- JSON.stringify(beach) %>;
+        var activeBeachID = b._id;
+        var beaches = <%- JSON.stringify(user.beaches) %>;
+</script>
+    
+<script src="https://s3-eu-west-1.amazonaws.com/kiteloop/public/js/beach.js"></script>
+
+    
+</body>
+</html>

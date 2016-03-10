@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+    <% include ../views/partials/head %> 
+    <link href="https://s3-eu-west-1.amazonaws.com/kiteloop/public/css/bootstrap-social.css" rel="stylesheet">
+</head>
+<body class="registerpage">
+<div class="logonbox">
+<div class="login">
+    
+    <a href="/"><img alt="Kiteloop" src="https://s3-eu-west-1.amazonaws.com/kiteloop/public/img/kiteloop.png" height="40"></img></a>    
+<!--
+    <div class="social">
+        <a href="/connect/facebook" class="btn btn-block btn-social btn-facebook">
+            <span class="fa fa-facebook"></span> Connect with Facebook
+        </a>
+    </div>
+-->
+	<% if (message.length > 0) { %>
+		<div class="alert alert-danger"><%= message %></div>
+	<% } %>
+
+	<!-- LOGIN FORM -->
+	<form action="/signup" method="post">
+        <div class="input-group margin-sm">
+              <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+              <input type="text" class="form-control" name="email" placeholder="Email Address" value="briani9973@gmail.com">
+        </div>
+        <div class="input-group margin-sm">
+              <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
+              <input type="password" class="form-control" name="password" placeholder="Password">
+        </div>
+        <div class="input-group margin-sm">
+              <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
+              <input type="password" class="form-control" name="passwordConfirm" placeholder="Confirm Password">
+        </div>
+            <button type="submit" class="btn btn-warning btn-login">Register</button>
+	</form>
+
+	<hr>
+    <div class="forgot login-footer">
+            <span>Already have an account? 
+                <a href="/login"> sign in here.</a>
+            </span>
+            </br>
+    </div>
+
+	<div class="text-center">
+        <p>By signing up for Knotify, you agree to the </br> <a href="/terms">Terms and Conditions</a></p>  
+        <p>View our <a href="/privacypolicy">Privacy Policy.</a></p>
+	</div>
+
+    </div>
+</div>
+</body>
+</html>
