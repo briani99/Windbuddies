@@ -1,0 +1,60 @@
+            <div class="panel panel-white post panel-shadow">
+                    <div class="post-heading">
+                        <div class="pull-left image">
+                            <img src="<%=post.user.avatar%>" class="img-circle avatar" alt="user profile image">
+                        </div>
+                        <div class="pull-left meta">
+                            <div class="title h5">
+                                <a href="/user/<%=post.user._id%>"><b><%=post.user.username%> </b></a>
+                            </div>
+                            <h6 class="text-muted time"><%=ago%> ago</h6>
+                        </div>
+                    </div> 
+                    <div class="post-description"> 
+                        
+                        <% if(post.type == "Wind"){ %>
+                            <!--        Create a Wind Post-->
+                            <div class="row windPost">
+                                <div id="directionDial" class="dial text-center col-xs-6">
+                                    <h4 id="directiontitle" class="postHeader">Direction</h4>
+                                    <i class="fa fa-location-arrow fa-3x insideIcon" id="icon<%=post._id %>" style="color:lightgrey"></i>
+                                    <input class="directionKnob" name="direction" data-min="0" data-skin="tron"
+                                           data-max="360" data-width="100%" data-linecap=round data-readOnly=true
+                                           data-cursor=true data-bgColor="grey" data-fgColor="#337ab7" 
+                                           data-thickness=.2 value="<%=post.direction%>">
+                                    <h4 id="desc<%=post._id %>" class="postHeader">N</h4>
+                                </div>
+                               <div id="speedDial" class="dial text-center col-xs-6">
+                                    <h4 id="speedtitle" class="postHeader">Speed</h4>
+                                    <input class="speedKnob" id="knob<%=post._id%>" name="knots" data-min="0" data-max="50" data-skin="tron"
+                                           data-width="100%" data-bgColor="grey" data-linecap=round data-readOnly=true
+                                           data-angleOffset=-125 data-angleArc=250 data-rotation="clockwise"
+                                           data-thickness=.2  value="<%=post.knots%>">
+                                    <h4 id="speedDesc" class="postHeader">Knots</h4>
+                                </div>
+                            </div>
+                        <% } %>
+                        
+                        <p id="postSubject<%=post._id%>" class="postSubjectText"><%=post.subject%></p>
+                        <div class="stats">
+                            <div id="plike<%=post._id%>" class="btn btn-default stat-item plike">
+                                <i class="fa fa-thumbs-up icon"></i><%=post.likesCnt%>
+                            </div>
+                            <div id="pcmmt<%=post._id%>" class="btn btn-default stat-item pcmmt">
+                                <i class="fa fa-comment icon"></i><%=post.commentsCnt%>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-footer" id="pcbox<%=post._id%>">
+                        
+                        <div id="commt<%=post._id%>"></div>
+                        
+                        <div class="input-group">
+                            <p id="postComment<%=post._id%>" class="form-control commentTextCreate" contentEditable=true class="form-control"></p>
+                          <span class="input-group-btn">
+                            <button  id="submitComment<%=post._id%>" class="btn btn-primary" type="button"><i class="fa fa-comment icon"></i></button>
+                          </span>
+                        </div>
+                        
+                    </div>
+                </div>

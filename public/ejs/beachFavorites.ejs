@@ -1,0 +1,9 @@
+<ul class="list-group">
+    <% for(var i=0; i<beaches.length; i++) {%>
+        
+        <li class="list-group-item beachItem" id="itemF<%=beaches[i]._id %>" >
+            <span><img src="https://s3-eu-west-1.amazonaws.com/kiteloop/public/country-dropdown/images/msdropdown/icons/blank.gif" class="favflag flag <%=beaches[i].country%> fnone"></span>
+            <%=beaches[i].name %>
+        </li>
+    <%  }  %>
+</ul>

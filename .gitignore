@@ -1,4 +1,11 @@
 node_modules
 aws
-public
+
+public/country-dropdown
+public/css
+public/img/emoji
+public/img/images
+public/js
+public/lib
+
 Gruntfile.js

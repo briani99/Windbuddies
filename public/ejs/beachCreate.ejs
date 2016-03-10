@@ -1,0 +1,74 @@
+<select class="form-control" id="selectCreate">
+    <option value="0">Choose</option>
+    <option value="1">Create Beach</option>
+    <option value="2">Create Kite School/Shop</option>
+  </select>
+<hr>
+
+<form id="createBeachform" class="form hidden" method="post" action="/beach">
+    <fieldset>
+    <!-- Text input-->
+    <div class="lorem">Drop and position Marker on the Map and fill in the required fields below.  After creating the beach you can add additional information in the Details Tab.</div>
+    <div class="form-group">
+        <div class="input-group margin-sm">
+          <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
+          <input class="form-control" name="name" type="text" placeholder="Name">
+        </div>
+        <div class="input-group margin-sm">
+          <span class="input-group-addon"><i class="fa fa-building-o fa-fw"></i></span>
+          <input class="form-control" name="city" type="text" placeholder="Town/City">
+        </div>
+        <input id="createlongitude" name="longitude" type="hidden" class="form-control input-md" required="">
+        <input id="createlatitude" name="latitude" type="hidden" class="form-control input-md" required="">
+        <input id="createCountry" name="country" type="hidden" class="form-control input-md" required="">
+    </div>
+
+    <!-- Button (Double) -->
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary col-xs-6 createSubmit btn-disabled" disabled><i class="fa fa-check"></i> Create</button>
+        <button type="reset" class="btn btn-danger col-xs-6 createCancel"><i class="fa fa-times"></i> Cancel</button>
+    </div>
+    </fieldset>
+</form>
+
+<form id="createBusinessform" class="form hidden" method="post" action="/business">
+    <fieldset>
+    <!-- Text input-->
+    <div class="lorem">Drop and position Marker on the Map and fill in the required fields below.</div>
+
+        <div class="form-group">
+
+        <div class="input-group margin-sm">
+          <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
+          <input class="form-control" name="name" type="text" placeholder="Name">
+        </div>
+        <div class="input-group margin-sm">
+          <span class="input-group-addon"><i class="fa fa-building-o fa-fw"></i></span>
+          <input class="form-control" name="city" type="text" placeholder="Town/City">
+        </div>
+        <div class="input-group margin-sm">
+          <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
+          <input class="form-control" name="phone" type="text" placeholder="Phone Number">
+        </div>
+        <div class="input-group margin-sm">
+          <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+          <input class="form-control" name="email" type="text" placeholder="Email address">
+        </div>
+        <div class="input-group margin-sm">
+          <span class="input-group-addon"><i class="fa fa-link fa-fw"></i></span>
+          <input class="form-control" name="website" type="text" placeholder="Website">
+        </div>
+
+        <input id="createBuslongitude" name="longitude" type="hidden" class="form-control input-md" required="">
+        <input id="createBuslatitude" name="latitude" type="hidden" class="form-control input-md" required="">
+        <input id="createBusCountry" name="country" type="hidden" class="form-control input-md" required="">
+
+    </div>
+
+    <!-- Button (Double) -->
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary col-xs-6 createSubmit btn-disabled" disabled><i class="fa fa-check"></i> Create</button>
+        <button type="reset" class="btn btn-danger col-xs-6 createCancel"><i class="fa fa-times"></i> Cancel</button>
+    </div>
+    </fieldset>
+</form>

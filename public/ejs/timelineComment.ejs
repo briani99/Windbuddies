@@ -1,0 +1,18 @@
+
+<div class="postComment">
+    <div class="row">
+        <div class="meta col-xs-2 col-sm-2 col-md-2">
+            <img src="<%=comment.user.avatar%>" class="img-circle avatar postcommentAvatar" alt="user profile image">
+        </div>
+        <div class=" main col-xs-10 col-sm-10 col-md-19">
+            <p class="commentText"><%=comment.text%></p>
+        </div>
+        <% if(userid === comment.user._id){ %>
+            <i class="fa fa-times deleteComment" id="deleteComment<%=comment._id%>post<%=postid%>"></i>
+        <% } %>
+    </div>
+    <div class="postCommentFooter">
+        <h6 class="text-muted time"><a href="/user/<%=comment.user._id%>">
+            <b><%=comment.user.username%></b></a>   <%=ago%> ago</h6>
+    </div>
+</div>
