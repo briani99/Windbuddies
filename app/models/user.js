@@ -64,7 +64,8 @@ var userSchema = mongoose.Schema({
     
     
     beaches : [{type: Schema.Types.ObjectId, ref: 'Beach' }],            
-    favbeach: {type: Schema.Types.ObjectId, ref: 'Beach' },
+    //Default is Dollymount
+    favbeach: {type: Schema.Types.ObjectId, ref: 'Beach', default: '56e18dce5ad8d40300946a7b' }, 
                
     kites : [{ kite : String, size: Number, Year: Number}]
 
