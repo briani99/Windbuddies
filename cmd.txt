@@ -1,0 +1,86 @@
+---
+NPM
+---
+
+npm config set proxy http://proxy:8083
+npm config set https-proxy https://proxy:8083
+
+npm config delete http-proxy
+npm config delete https-proxy
+
+npm install --save    to update package.json
+
+
+nodemon launch.js
+
+#The command to reset proxy for npm 
+npm config rm proxy
+npm config rm https-proxy
+
+
+# reset proxy for git
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+
+# get proxy setting for git
+git config --global --list
+npm config get list
+npm config get proxy
+npm config get https-proxy
+
+git config --global http.proxy http://proxy:8083
+git config --global --unset http.proxy
+
+
+-----
+DEBUG
+-----
+
+node --debug yourApp.js
+node-inspector --web-port=3000
+
+
+needs to use port 8080
+
+------------
+GIT & HEROKU
+------------
+
+git init
+git add .
+git commit -m "Message"
+
+heroku create 
+git push heroku master
+
+heroku ps:scale web=1
+
+heroku open
+
+
+heroku config:set TIMES=2    to set process env vars process.env.TIMES
+
+
+------------
+PROXY WORK
+------------
+
+set http_proxy=http://proxy:8080
+set https_proxy=http://proxy:8080
+
+set http_proxy=
+set https_proxy=
+
+------------
+GIT & HEROKU
+------------
+
+npm install -g grunt-cli
+grunt init:dev
+grunt init:prod
+
+grunt server
+
+
+
+
