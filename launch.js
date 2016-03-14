@@ -53,9 +53,18 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 //app.use(session({ secret: 'ilovetokiteingustyconditions' })); // session secret
 //app.use(express.session({ store: new MongoStore() }));
 
-app.use(session({secret: 'a4f8071f-c873-4447-8ee2',
-                 cookie: { maxAge: 2628000000 },
-                 store: MongoStore }));
+//app.use(session({secret: 'a4f8071f-c873-4447-8ee2',
+//                 cookie: { maxAge: 2628000000 },
+//                 store: new MongoStore }));
+
+app.use(session({
+  secret: 'ilovetokiteingustyconditions',
+  clear_interval: 900,
+  cookie: { maxAge: 2 * 60 * 60 * 1000 },
+  store: new MongoStore({
+    db: mongoose.connection.db
+  });
+}));
 
 
 app.use(passport.initialize());
