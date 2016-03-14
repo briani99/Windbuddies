@@ -22,9 +22,11 @@ var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var expressValidator = require('express-validator');
-var session      = require('express-session');
-var nodemailer = require('nodemailer');
 
+var session      = require('express-session');
+var MongoStore = require('express-session-mongo');
+
+var nodemailer = require('nodemailer');
 var configDB = require('./config/database.js');
 
 // configuration ===============================================================
@@ -41,7 +43,6 @@ app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.json()); // get information from html forms
 app.use(bodyParser.urlencoded({ extended: true }));
-
 app.use(expressValidator()); 
 
 app.use('/public', express.static(__dirname + '/public'));
@@ -49,14 +50,18 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 
 
 // required for passport
-app.use(session({ secret: 'ilovetokiteingustyconditions' })); // session secret
+//app.use(session({ secret: 'ilovetokiteingustyconditions' })); // session secret
+//app.use(express.session({ store: new MongoStore() }));
+
+app.use(session({secret: 'a4f8071f-c873-4447-8ee2',
+                 cookie: { maxAge: 2628000000 },
+                 store: new MongoStore() }));
+
+
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(passport.authenticate('remember-me'));
 app.use(flash()); // use connect-flash for flash messages stored in session
-
-
-
 
 // routes ======================================================================
 // load our routes and pass in our app and fully configured passport

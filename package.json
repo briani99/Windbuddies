@@ -10,7 +10,7 @@
     "ejs-mate": "^2.3.0",
     "express": "~4.0.0",
     "express-session": "~1.0.0",
-    "mongoose": "~3.8.1",
+    "mongoose": "~3.8.39",
     "morgan": "~1.0.0",
     "passport": "~0.1.17",
     "passport-facebook": "~1.0.2",
@@ -26,7 +26,8 @@
     "passport-remember-me": "0.0.1",
     "aws-sdk": "~2.2.38",
     "express-validator": "~2.19.1",
-    "method-override": "~2.3.5"
+    "method-override": "~2.3.5",
+    "express-session-mongo": "~0.1.0"
   },
   "scripts": {
     "start": "node launch.js"
