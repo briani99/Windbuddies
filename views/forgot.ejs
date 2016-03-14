@@ -15,13 +15,15 @@
             <i class="fa fa-check"></i>
                 <%=message%> 
         </div>
-    <% } %>
+    <% } else { %>
+        <form action="/forgot" method="post">
+            <input type="text" class="form-control" name="email" placeholder="Email">
+            <button type="submit" class="btn btn-warning btn-login">Reset Password</button>
+        </form>
+    <% }  %>
     
 	<!-- LOGIN FORM -->
-	<form action="/forgot" method="post">
-			<input type="text" class="form-control" name="email" placeholder="Email">
-            <button type="submit" class="btn btn-warning btn-login">Reset Password</button>
-	</form>
+	
 
 	<hr>
     <div class="forgot login-footer">

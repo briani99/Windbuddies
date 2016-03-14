@@ -314,7 +314,7 @@ module.exports = function(app, passport) {
               'If you did not request this, please ignore this email and your password will remain unchanged.\n'
           };
           smtpTransport.sendMail(mailOptions, function(err) {
-            req.flash('info', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
+            req.flash('info', 'An e-mail has been sent to ' + user.local.email + ' with further instructions.');
             done(err, 'done');
           });
         }
@@ -370,7 +370,7 @@ module.exports = function(app, passport) {
             from: 'passwordreset@demo.com',
             subject: 'Your password has been changed',
             text: 'Hello,\n\n' +
-              'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
+              'This is a confirmation that the password for your account ' + user.local.email + ' has just been changed.\n'
           };
           smtpTransport.sendMail(mailOptions, function(err) {
             req.flash('success', 'Success! Your password has been changed.');
