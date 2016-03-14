@@ -53,6 +53,7 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 //app.use(session({ secret: 'ilovetokiteingustyconditions' })); // session secret
 
 app.use(session({
+    secret: 'ilovetokiteingustyconditions',
     store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
 
