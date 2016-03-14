@@ -137,7 +137,6 @@ beachRouter.post('/:id', Authorize.isLoggedIn, function(req, res, next) {
             });
           });
 });
-});
 
 /* PUT /beach/:id - update the beach by id*/
 beachRouter.put('/:id', Authorize.isLoggedIn, function(req, res, next) {
