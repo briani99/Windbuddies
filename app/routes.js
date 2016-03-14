@@ -301,7 +301,6 @@ module.exports = function(app, passport) {
             auth: {
                 user: configAuth.mailAuth.user,
                 pass: configAuth.mailAuth.password
-                //api_key: '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'
             }
           });
           var mailOptions = {
@@ -320,7 +319,8 @@ module.exports = function(app, passport) {
         }
       ], function(err) {
         if (err) return next(err);
-        res.redirect('/forgot');
+        //res.redirect('/forgot');
+        res.render('forgot.ejs', { message: req.flash('info') });
       });
     });
 
