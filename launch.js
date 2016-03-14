@@ -63,7 +63,7 @@ app.use(session({
   cookie: { maxAge: 2 * 60 * 60 * 1000 },
   store: new MongoStore({
     db: mongoose.connection.db
-  });
+  })
 }));
 
 
