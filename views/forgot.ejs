@@ -9,6 +9,14 @@
 	<h1></h1>
     <h2><span class="fa fa-sign-in"></span>Reset Password</h2>
     
+    <% if (message.length > 0) { %>
+        <div class="alert alert-info alert-dismissable">
+            <a class="panel-close close" data-dismiss="alert">×</a> 
+            <i class="fa fa-check"></i>
+                <%=message%> 
+        </div>
+    <% } %>
+    
 	<!-- LOGIN FORM -->
 	<form action="/forgot" method="post">
 			<input type="text" class="form-control" name="email" placeholder="Email">

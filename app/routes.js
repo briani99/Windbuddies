@@ -268,7 +268,8 @@ module.exports = function(app, passport) {
     // =============================================================================
     app.get('/forgot', function(req, res) {
         res.render('forgot.ejs', {
-            user: req.user
+            user: req.user,
+            message: ""
         });
     });
     
