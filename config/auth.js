@@ -27,9 +27,9 @@ module.exports = {
     },
     
     'mailAuth' : {
-        'service'      : 'Gmail',
-        'user'  : 'briani9973',
-        'password'   : 'phonecol!(&^',
+        'service'      : 'Zoho',
+        'user'  : 'brian@windbuddies.com',
+        'password'   : '$HatGB14',
         'apikey'   : ''       
     },
     'aws' : {
