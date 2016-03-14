@@ -1,5 +1,6 @@
 node_modules
 aws
+aws-credentials.json
 
 public/country-dropdown
 public/css
