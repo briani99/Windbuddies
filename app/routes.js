@@ -37,6 +37,15 @@ module.exports = function(app, passport) {
 		req.logout();
 		res.redirect('/');
 	});
+    
+    // Static content ==============================
+	app.get('/privacypolicy', function(req, res) {
+        res.render('privacy.ejs');
+	});
+    
+    app.get('/terms', function(req, res) {
+        res.render('terms.ejs');
+	});
 
 
 // =============================================================================
