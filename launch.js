@@ -24,7 +24,7 @@ var bodyParser   = require('body-parser');
 var expressValidator = require('express-validator');
 
 var session      = require('express-session');
-var MongoStore = require('express-session-mongo');
+var MongoStore = require('connect-mongo')(session);
 
 var nodemailer = require('nodemailer');
 var configDB = require('./config/database.js');
@@ -51,19 +51,9 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 
 // required for passport
 //app.use(session({ secret: 'ilovetokiteingustyconditions' })); // session secret
-//app.use(express.session({ store: new MongoStore() }));
-
-//app.use(session({secret: 'a4f8071f-c873-4447-8ee2',
-//                 cookie: { maxAge: 2628000000 },
-//                 store: new MongoStore }));
 
 app.use(session({
-  secret: 'ilovetokiteingustyconditions',
-  clear_interval: 900,
-  cookie: { maxAge: 2 * 60 * 60 * 1000 },
-  store: new MongoStore({
-    db: mongoose.connection.db
-  })
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
 
 
