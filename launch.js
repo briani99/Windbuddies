@@ -55,7 +55,7 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 
 app.use(session({secret: 'a4f8071f-c873-4447-8ee2',
                  cookie: { maxAge: 2628000000 },
-                 store: new MongoStore() }));
+                 store: MongoStore }));
 
 
 app.use(passport.initialize());
