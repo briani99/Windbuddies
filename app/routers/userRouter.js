@@ -245,7 +245,7 @@ userRouter.post('/setHomeBeach/:beachid', Authorize.isLoggedIn, function(req, re
 /* post /user/:id - updates the user by id to view or update */
 userRouter.post('/:id', Authorize.isLoggedIn, function(req, res, next) {
     
-    User.findByIdAndUpdate(req.params.id, req.body, function (err, u) {
+    User.findByIdAndUpdate(req.params.id, req.body, {new: true}, function (err, u) {
         
         console.log("User updated : " + u);
         
