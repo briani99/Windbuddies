@@ -250,6 +250,7 @@ userRouter.post('/:id', Authorize.isLoggedIn, function(req, res, next) {
         User.populate(u, {path: 'favbeach beaches'}, function (err, newU) {
           //newU.save(function(err,user){
             if (err) return next(err);
+            console.log("here: user is : " + newU);
             res.render('profile.ejs', {
                 user : newU,
                 message :"was updated successfully."
