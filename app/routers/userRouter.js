@@ -246,14 +246,15 @@ userRouter.post('/setHomeBeach/:beachid', Authorize.isLoggedIn, function(req, re
 userRouter.post('/:id', Authorize.isLoggedIn, function(req, res, next) {
     
     User.findByIdAndUpdate(req.params.id, req.body, function (err, u) {
+        if (err) return next(err);
         User.populate(u, {path: 'favbeach beaches'}, function (err, newU) {
-          newU.save(function(err,user){
+          //newU.save(function(err,user){
             if (err) return next(err);
             res.render('profile.ejs', {
-                user : user,
+                user : newU,
                 message :"was updated successfully."
             });
-          });
+          //});
         });
     });
 });
