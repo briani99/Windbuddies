@@ -246,6 +246,9 @@ userRouter.post('/setHomeBeach/:beachid', Authorize.isLoggedIn, function(req, re
 userRouter.post('/:id', Authorize.isLoggedIn, function(req, res, next) {
     
     User.findByIdAndUpdate(req.params.id, req.body, function (err, u) {
+        
+        console.log("here: user is : " + u);
+        
         if (err) return next(err);
         User.populate(u, {path: 'favbeach beaches'}, function (err, newU) {
           //newU.save(function(err,user){
