@@ -187,11 +187,6 @@ userRouter.post('/avatar', Authorize.isLoggedIn, uploading, function(req, res, n
 
 });
 
-//function uploadFile(remoteFilename, fileName) {
-//    
-//}
-
-
 function getContentTypeByFile(fileName) {
     var rc = 'application/octet-stream';
     var fileNameLowerCase = fileName.toLowerCase();
@@ -223,7 +218,6 @@ userRouter.post('/toggleFavBeaches/:beachid', Authorize.isLoggedIn, function(req
         User.populate(u, {path: 'favbeach beaches'}, function (err, newU) {
             newU.save(function(err,user){
                 if (err) return next(err);
-                console.log("USER::::: " + user);
                 return res.json(user);
             });
         });
@@ -247,18 +241,13 @@ userRouter.post('/:id', Authorize.isLoggedIn, function(req, res, next) {
     
     User.findByIdAndUpdate(req.params.id, req.body, {new: true}, function (err, u) {
         
-        console.log("User updated : " + u);
-        
         if (err) return next(err);
         User.populate(u, {path: 'favbeach beaches'}, function (err, newU) {
-          //newU.save(function(err,user){
             if (err) return next(err);
-            console.log("Before render : " + newU);
             res.render('profile.ejs', {
                 user : newU,
                 message :"was updated successfully."
             });
-          //});
         });
     });
 });

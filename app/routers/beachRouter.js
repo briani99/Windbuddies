@@ -127,9 +127,8 @@ beachRouter.get('/:id', Authorize.isLoggedIn, function(req, res, next) {
 
 /* post /beach/:id - updates the beach by id to view or update */
 beachRouter.post('/:id', Authorize.isLoggedIn, function(req, res, next) {
-    Beach.findByIdAndUpdate(req.params.id, req.body, function (err, b) {
+    Beach.findByIdAndUpdate(req.params.id, req.body, {new: true}, function (err, b) {
             if (err) return next(err);
-            console.log('User saved:', b);
             res.render('beach.ejs', {
                 user : req.user,
                 beach : b,
@@ -140,7 +139,7 @@ beachRouter.post('/:id', Authorize.isLoggedIn, function(req, res, next) {
 
 /* PUT /beach/:id - update the beach by id*/
 beachRouter.put('/:id', Authorize.isLoggedIn, function(req, res, next) {
-  Beach.findByIdAndUpdate(req.params.id, req.body, function (err, beach) {
+  Beach.findByIdAndUpdate(req.params.id, req.body, {new: true}, function (err, beach) {
     if (err) return next(err);
     res.json(beach);
   });
