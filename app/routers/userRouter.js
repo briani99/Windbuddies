@@ -247,13 +247,13 @@ userRouter.post('/:id', Authorize.isLoggedIn, function(req, res, next) {
     
     User.findByIdAndUpdate(req.params.id, req.body, function (err, u) {
         
-        console.log("here: user is : " + u);
+        console.log("User updated : " + u);
         
         if (err) return next(err);
         User.populate(u, {path: 'favbeach beaches'}, function (err, newU) {
           //newU.save(function(err,user){
             if (err) return next(err);
-            console.log("here: user is : " + newU);
+            console.log("Before render : " + newU);
             res.render('profile.ejs', {
                 user : newU,
                 message :"was updated successfully."
