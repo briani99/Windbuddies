@@ -70,9 +70,9 @@ userRouter.get('/json/:id', Authorize.isLoggedIn, function(req, res, next) {
 /* Crop and save the image in here */
 userRouter.post('/avatar', Authorize.isLoggedIn, uploading, function(req, res, next) {
     
-    user = req.user;
+    var user = req.user;
     
-    cropData = JSON.parse(req.body.avatar_data);
+    var cropData = JSON.parse(req.body.avatar_data);
     
     //console.log(req.body.avatar_data);
     

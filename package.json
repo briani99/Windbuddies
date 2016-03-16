@@ -27,7 +27,6 @@
     "aws-sdk": "~2.2.38",
     "express-validator": "~2.19.1",
     "method-override": "~2.3.5",
-    "express-session-mongo": "~0.1.0",
     "connect-mongo": "~1.1.0"
   },
   "scripts": {
