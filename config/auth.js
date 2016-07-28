@@ -3,14 +3,14 @@
 module.exports = {
 
     'facebookAuth' : {
-        'clientID'      : '1476074872714263', // your App ID
-        'clientSecret'  : '51489c5efe55c32cdd3dd72cacfabf47', // your App Secret
+        'clientID'      : '', // your App ID
+        'clientSecret'  : '', // your App Secret
         'callbackURL'   : 'http://www.windbuddies.com/auth/facebook/callback'
     },
 
     'twitterAuth' : {
-        'consumerKey'       : 'your-consumer-key-here',
-        'consumerSecret'    : 'your-client-secret-here',
+        'consumerKey'       : '',
+        'consumerSecret'    : '',
         'callbackURL'       : 'http://www.windbuddies.com/auth/twitter/callback'
     },
 
@@ -21,20 +21,20 @@ module.exports = {
     },
     
     'instagramAuth' : {
-        'clientID'      : '45237db651104479897e04d4b51980f7',
-        'clientSecret'  : 'f8bd2dea25c4485daeb513b3efdb1e11',
+        'clientID'      : '',
+        'clientSecret'  : '',
         'callbackURL'   : 'http://www.windbuddies.com/auth/instagram/callback'
     },
     
     'mailAuth' : {
         'service'      : 'Zoho',
         'user'  : 'brian@windbuddies.com',
-        'password'   : '$HatGB14',
+        'password'   : '',
         'apikey'   : ''       
     },
     'aws' : {
-        'AWS_ACCESS_KEY' : 'AKIAJQQFBBCVMLLFK7VA',
-        'AWS_SECRET_KEY' : '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',
-        'S3_BUCKET' : 'kiteloop'
+        'AWS_ACCESS_KEY' : '',
+        'AWS_SECRET_KEY' : '',
+        'S3_BUCKET' : ''
     }
 };
