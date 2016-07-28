@@ -15,11 +15,7 @@ module.exports = function(app, passport) {
 
 	// show the home page
 	app.get('/', Authorize.isLoggedIn,  function(req, res) {
-        if(req.user.favbeach){
-            res.redirect('/post');
-        }else{
             res.redirect('/beach/map');
-        }
 	});
 
 	// PROFILE SECTION =========================

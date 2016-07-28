@@ -2,6 +2,8 @@ node_modules
 aws
 aws-credentials.json
 
+config/auth.js
+
 public/country-dropdown
 public/css
 public/img/emoji
